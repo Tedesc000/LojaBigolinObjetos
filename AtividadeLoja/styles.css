@@ -1,0 +1,167 @@
+body{
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgb(228, 226, 226);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+header{
+    width: 100%;
+    height: 15vh;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+}
+
+header ul{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+header li{
+    list-style: none;
+    font-size: 1.5em;
+    height: 100%;
+}
+
+header li a{
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+}
+
+header li a:hover{
+    background-color: rgb(112, 164, 182);
+}
+
+main{
+    width: 60vw;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+main h1{
+    font-size: 2.5em;
+    background-color:  rgb(112, 164, 182);
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    margin: 0;
+}
+
+main ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+main li{
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+main li a{
+    text-decoration: none;
+    color: black;
+    background-color: lightblue;
+    padding: 5px;
+    display: flex;
+    width: 20vw;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+main li a:hover{
+    background-color: rgb(112, 164, 182);
+    transform: scale(1.1);
+    transition: all 0.7s ease;
+}
+
+/* Estilos da Tabela */
+main table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 20px auto;
+    background-color: white;
+}
+
+main table tr:first-child {
+    background-color: rgb(112, 164, 182);
+    font-weight: bold;
+}
+
+main table td {
+    padding: 10px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+/* Estilos Universais para Formulários */
+main form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 60%;
+    margin: 10px auto;
+    padding-bottom: 20px;
+}
+
+main form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    gap: 8px;
+    text-align: left;
+}
+
+main form input, main form select {
+    padding: 12px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+main form button {
+    margin-top: 15px;
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: black;
+    background-color: lightblue;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+main form button:hover {
+    background-color: rgb(112, 164, 182);
+    color: white;
+    transform: scale(1.02);
+}
