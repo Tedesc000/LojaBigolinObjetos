@@ -25,4 +25,13 @@ class Cliente{
     public function setCpf($cpf){ $this->cpf = $cpf;}
     public function setTelefone($telefone){ $this->telefone = $telefone;}
     public function setEmail($email){ $this->email = $email;}
+
+    public function salvar(){
+        $stmt = $this->pdo->prepare("INSERT INTO cliente(nome, cpf, telefone, email) VALUES (:nome, :cpf, :telefone, :email)");
+        $stmt->bindParam(":nome", this->nome);
+        $stmt->bindParam(":cpf", this->cpf);
+        $stmt->bindParam(":telefone", this->telefone);
+        $stmt->bindParam(":email", this->email);
+        return $stmt->execute();
+    }
 }

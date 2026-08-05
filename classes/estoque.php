@@ -21,4 +21,12 @@ class Estoque{
     public function setIdProduto($id_produto){ $this->id_produto = $id_produto;}
     public function setQuantidade($quantidade){ $this->quantidade = $quantidade;}
     public function setPavilhao($pavilhao){ $this->pavilhao = $pavilhao;}
+
+    public function salvar(){
+        $stmt = $this->pdo->prepare("INSERT INTO estoque(id_produto, quantidade, pavilhão) VALUES (:id_produto, :quantidade, :pavilhao)");
+        $stmt->bindParam(":id_produto", this->id_produto);
+        $stmt->bindParam(":quantidade", this->quantidade);
+        $stmt->bindParam(":pavilhao", this->pavilhao);
+        return $stmt->execute();
+    }
 }
