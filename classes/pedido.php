@@ -24,21 +24,25 @@ class Produto{
     public function getStatus(){ return $this->status;}
 
     public function setID($id_produto){ $this->id_produto = $id_produto;}
-    public function setIdMarca($id_marca){ $this->id_marca = $id_marca;}
-    public function setIdSetor($id_setor){ $this->id_setor = $id_setor;}
+    public function setIdProduto($id_produto){ $this->id_produto = $id_produto;}
+    public function setIdCliente($id_cliente){ $this->id_cliente = $id_cliente;}
     public function setNome($data){ $this->data = $data;}
     public function setQuantidade($quantidade){ $this->quantidade = $quantidade;}
     public function setPreco($preco){ $this->preco = $preco;}
     public function setStatus($status){ $this->status = $status;}
 
     public function salvar(){
-        $stmt = $this->pdo->prepare("INSERT INTO pedido(id_produto, id_cliente, data, preco, quantidade, status) VALUES (:id_produto, :id_cliente, :data, :preco, :quantidade, :status)");
-        $stmt->bindParam(":id_produto", this->id_produto);
-        $stmt->bindParam(":id_cliente", this->id_cliente);
-        $stmt->bindParam(":data", this->data);
-        $stmt->bindParam(":preco", this->preco);
-        $stmt->bindParam(":quantidade", this->quantidade);
-        $stmt->bindParam(":status", this->status);
-        return $stmt->execute();
+        if($this->id_pedido){
+
+        }else{
+            $stmt = $this->pdo->prepare("INSERT INTO pedido(id_produto, id_cliente, data, preco, quantidade, status) VALUES (:id_produto, :id_cliente, :data, :preco, :quantidade, :status)");
+            $stmt->bindParam(":id_produto", $this->id_produto);
+            $stmt->bindParam(":id_cliente", $this->id_cliente);
+            $stmt->bindParam(":data", $this->data);
+            $stmt->bindParam(":preco", $this->preco);
+            $stmt->bindParam(":quantidade", $this->quantidade);
+            $stmt->bindParam(":status", $this->status);
+            return $stmt->execute();
+        }
     }
 }

@@ -20,9 +20,13 @@ class Marca{
     public function setPais($pais){ $this->pais = $pais;}
 
     public function salvar(){
-        $stmt = $this->pdo->prepare("INSERT INTO marcas(nome, pais) VALUES (:nome, :pais)");
-        $stmt->bindParam(":nome", this->nome);
-        $stmt->bindParam(":pais", this->pais);
-        return $stmt->execute();
+        if($this->id_marca){
+
+        }else{
+            $stmt = $this->pdo->prepare("INSERT INTO marcas(nome, pais) VALUES (:nome, :pais)");
+            $stmt->bindParam(":nome", $this->nome);
+            $stmt->bindParam(":pais", $this->pais);
+            return $stmt->execute();
+        }
     }
 }
