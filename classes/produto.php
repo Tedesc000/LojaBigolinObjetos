@@ -33,16 +33,43 @@ class Produto{
 
     public function salvar(){
         if($this->id_produto){
-
-        }else{
-            $stmt = $this->pdo->prepare("INSERT INTO pedido(id_produto, id_cliente, data, preco, quantidade, status) VALUES (:id_produto, :id_cliente, :data, :preco, :quantidade, :status)");
+            $stmt = $this->pdo->prepare("UPDATE produto SET id_marca = :id_marca, id_setor = :id_setor, nome = :nome, preco = :preco, descricao = :descricao, status = :status WHERE id_produto = :id_produto");
+            $stmt->bindParam(":id_marca", $this->id_marca);
+            $stmt->bindParam(":id_setor", $this->id_setor);
+            $stmt->bindParam(":nome", $this->nome);
+            $stmt->bindParam(":preco", $this->preco);
+            $stmt->bindParam(":descricao", $this->descricao);
+            $stmt->bindParam(":status", $this->status);
             $stmt->bindParam(":id_produto", $this->id_produto);
-            $stmt->bindParam(":id_cliente", $this->id_cliente);
-            $stmt->bindParam(":data", $this->data);
+            return $stmt->execute();
+        }else{
+            $stmt = $this->pdo->prepare("INSERT INTO produto(id_marca, id_setor, nome, preco, descricao, status) VALUES (:id_marca, :id_setor, :nome, :preco, :descricao, :status)");
+            $stmt->bindParam(":id_marca", $this->id_marca);
+            $stmt->bindParam(":id_setor", $this->id_setor);
+            $stmt->bindParam(":nome", $this->nome);
+            $stmt->bindParam(":preco", $this->preco);
             $stmt->bindParam(":preco", $this->preco);
             $stmt->bindParam(":quantidade", $this->quantidade);
             $stmt->bindParam(":status", $this->status);
             return $stmt->execute();
         }
+    }
+
+    public function selecionar(){
+        $stmt = $this->pdo->prepare("SELECT * FROM produto WHERE id_produto = :id_produto");
+        $stmt->execute([':id_produto' => $this->id_produto]);
+        return $stmt->fetchAll();
+    }
+
+    public function listar(){
+        $stmt = $this->pdo->prepare("SELECT * FROM produto");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function excluir(){
+        if(!$this->id_produto) return false;
+        $stmt = $this->pdo->prepare("DELETE FROM produto WHERE id_produto = :id_produto");
+        return $stmt->execute([':id_produto' => $this->id_produto]);
     }
 }

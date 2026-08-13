@@ -24,13 +24,36 @@ class Estoque{
 
     public function salvar(){
         if($this->id_estoque){
-
+            $stmt = $this->pdo->prepare("UPDATE estoque SET id_produto = :id_produto, quantidade = :quantidade, pavilhão = :pavilhao WHERE id_estoque = :id_estoque");
+            $stmt->bindParam(":id_produto", $this->id_produto);
+            $stmt->bindParam(":quantidade", $this->quantidade);
+            $stmt->bindParam(":pavilhao", $this->pavilhao);
+            $stmt->bindParam(":id_estoque", $this->id_estoque);
+            return $stmt->execute();
         }else{
             $stmt = $this->pdo->prepare("INSERT INTO estoque(id_produto, quantidade, pavilhão) VALUES (:id_produto, :quantidade, :pavilhao)");
-        $stmt->bindParam(":id_produto", $this->id_produto);
-        $stmt->bindParam(":quantidade", $this->quantidade);
-        $stmt->bindParam(":pavilhao", $this->pavilhao);
+            $stmt->bindParam(":id_produto", $this->id_produto);
+            $stmt->bindParam(":quantidade", $this->quantidade);
+            $stmt->bindParam(":pavilhao", $this->pavilhao);
         return $stmt->execute();
         }
+    }
+
+    public function selecionar(){
+        $stmt = $this->pdo->prepare("SELECT * FROM estoque WHERE id_estoque = :id_estoque");
+        $stmt->execute([':id_estoque' => $this->id_estoque]);
+        return $stmt->fetchAll();
+    }
+
+    public function listar(){
+        $stmt = $this->pdo->prepare("SELECT * FROM estoque");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function excluir(){
+        if(!$this->id_estoque) return false;
+        $stmt = $this->pdo->prepare("DELETE FROM estoque WHERE id_estoque = :id_estoque");
+        return $stmt->execute([':id_estoque' => $this->id_estoque]);
     }
 }
