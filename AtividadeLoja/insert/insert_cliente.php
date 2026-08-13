@@ -1,21 +1,12 @@
 <?php
-require "../conexao.php";
-$pdo = getConexao();
-$sql = "INSERT INTO cliente(nome, cpf, telefone, email) VALUES (:nome, :cpf, :telefone, :email)";
-$stmt = $pdo->prepare($sql);
+require_once '../classes/cliente.php';
 
-$nome = $_POST[":nome"];
-$cpf = $_POST[":cpf"];
-$telefone = $_POST[":telefone"];
-$email = $_POST[":email"];
+$cliente = new Cliente();
+$cliente->setNome($_POST['nome']);
+$cliente->setCPF($_POST['cpf']);
+$cliente->setTelefone($_POST['telefone']);
+$cliente->setEmail($_POST['email']);
 
-
-
-$stmt->execute([
-    ':nome' => $nome,
-    ':cpf' => $cpf,
-    ':telefone' => $telefone,
-    ':email' => $email
-]);
+$cliente->salvar();
 
 header("Location: ../index.php");

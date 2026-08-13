@@ -1,16 +1,9 @@
 <?php
-    require "../conexao.php";
-        $pdo = getConexao();
-        $sql = "INSERT INTO marcas(nome, pais) VALUES (:nome, :pais)";
-        $stmt = $pdo->prepare($sql);
+require_once '../classes/marca.php';
+    $marca = new Marca();
+    $marca->setNome($_POST['nome']);
+    $marca->setPais($_POST['pais']);
 
-        $nome = $_POST[":nome"];
-        $pais = $_POST[":pais"];
+    $marca->salvar();
 
-        
-
-        $stmt->execute([
-            ':nome' => $nome,
-            ':pais' => $pais
-        ]);
     header("Location: ../index.php");

@@ -1,6 +1,6 @@
 <?php
 require "../conexao.php";
-class Produto{
+class Pedido{
     private $id_pedido;
     private $id_produto;
     private $id_cliente;
@@ -17,16 +17,16 @@ class Produto{
     //getters e setters
     public function getID(){ return $this->id_pedido;}
     public function getIdCliente(){ return $this->id_cliente;}
-    public function getIdSetor(){ return $this->id_setor;}
+    public function getIdProduto(){ return $this->id_produto;}
     public function getData(){ return $this->data;}
     public function getQuantidade(){ return $this->quantidade;}
     public function getPreco(){ return $this->preco;}
     public function getStatus(){ return $this->status;}
 
-    public function setID($id_produto){ $this->id_produto = $id_produto;}
+    public function setID($id_pedido){ $this->id_pedido = $id_pedido;}
     public function setIdProduto($id_produto){ $this->id_produto = $id_produto;}
     public function setIdCliente($id_cliente){ $this->id_cliente = $id_cliente;}
-    public function setNome($data){ $this->data = $data;}
+    public function setData($data){ $this->data = $data;}
     public function setQuantidade($quantidade){ $this->quantidade = $quantidade;}
     public function setPreco($preco){ $this->preco = $preco;}
     public function setStatus($status){ $this->status = $status;}

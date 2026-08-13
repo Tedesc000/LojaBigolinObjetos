@@ -1,17 +1,8 @@
 <?php
-    require "../conexao.php";
-        $pdo = getConexao();
-        $sql = "INSERT INTO setor(nome, descricao) VALUES (:nome, :descricao)";
-        $stmt = $pdo->prepare($sql);
+require_once '../classes/setor.php';
+    $setor = new Setor();
+    $setor->setNome($_POST['nome']);
+    $setor->setDescricao($_POST['descricao']);
 
-        $nome = $_POST[":nome"];
-        $descricao = $_POST[":descricao"];
-
-        
-
-        $stmt->execute([
-            ':nome' => $nome,
-            ':descricao' => $descricao
-        ]);
-
+    $setor->salvar();
     header("Location: ../index.php");

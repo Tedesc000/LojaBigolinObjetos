@@ -48,8 +48,7 @@ class Produto{
             $stmt->bindParam(":id_setor", $this->id_setor);
             $stmt->bindParam(":nome", $this->nome);
             $stmt->bindParam(":preco", $this->preco);
-            $stmt->bindParam(":preco", $this->preco);
-            $stmt->bindParam(":quantidade", $this->quantidade);
+            $stmt->bindParam(":descricao", $this->descricao);
             $stmt->bindParam(":status", $this->status);
             return $stmt->execute();
         }
