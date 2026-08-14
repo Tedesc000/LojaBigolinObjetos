@@ -26,10 +26,8 @@
             <td>status</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM pedido ORDER BY id_pedido DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $pedidos = $stmt->fetchAll();
+        $pedido = new Pedido();
+        $pedidos = $pedido->listar();
         foreach($pedidos as $pedido):
         ?>
         <tr>

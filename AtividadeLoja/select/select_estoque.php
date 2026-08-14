@@ -23,10 +23,8 @@
             <td>pavilhao</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM estoque ORDER BY id_estoque DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $estoques = $stmt->fetchAll();
+        $estoque = new Estoque();
+        $estoques = $estoque->listar();
         foreach($estoques as $estoque):
         ?>
         <tr>

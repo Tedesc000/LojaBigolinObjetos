@@ -40,7 +40,7 @@ class Estoque{
         if($ok){
             $this->id_estoque = $this->pdo->lastInsertId();
         }
-        return $stmt->execute();
+        return $ok;
     }
 
     public function selecionar(){

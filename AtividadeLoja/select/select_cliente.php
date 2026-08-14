@@ -12,6 +12,9 @@
     require "../conexao.php";
     $pdo = getConexao();
 
+    $cliente = new Cliente();
+    $clientes = $cliente->listar();
+
     ?>
     <main>
     <h1>Cliente</h1>

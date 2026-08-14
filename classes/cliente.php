@@ -46,7 +46,7 @@ class Cliente{
         if($ok){
             $this->id_cliente = $this->pdo->lastInsertId();
         }
-        return $stmt->execute();
+        return $ok;
     }
 
     public function selecionar(){

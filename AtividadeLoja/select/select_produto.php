@@ -25,10 +25,8 @@
             <td>descricao</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM produto ORDER BY id_produto DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $produtos = $stmt->fetchAll();
+        $produto = new Produto();
+        $produtos = $produto->listar();
         foreach($produtos as $produto):
         ?>
         <tr>

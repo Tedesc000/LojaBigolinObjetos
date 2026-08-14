@@ -35,7 +35,7 @@ class Marca{
         if($ok){
             $this->id_marca = $this->pdo->lastInsertId();
         }
-        return $stmt->execute();
+        return $ok;
     }
 
     public function selecionar(){

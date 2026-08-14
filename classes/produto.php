@@ -55,7 +55,7 @@ class Produto{
         if($ok){
             $this->id_produto = $this->pdo->lastInsertId();
         }
-        return $stmt->execute();
+        return $ok;
     }
 
     public function selecionar(){

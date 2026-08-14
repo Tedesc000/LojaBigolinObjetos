@@ -22,10 +22,8 @@
             <td>pais</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM marcas ORDER BY id_marca DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $marcas = $stmt->fetchAll();
+        $marca = new Cliente();
+        $marcas = $marca->listar();
         foreach($marcas as $marca):
         ?>
         <tr>

@@ -35,7 +35,7 @@ class Setor{
         if($ok){
             $this->id_setor = $this->pdo->lastInsertId();
         }
-        return $stmt->execute();
+        return $ok;
     }
 
     public function selecionar(){

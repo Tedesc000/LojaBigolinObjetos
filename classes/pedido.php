@@ -55,7 +55,7 @@ class Pedido{
         if($ok){
             $this->id_pedido = $this->pdo->lastInsertId();
         }
-        return $stmt->execute();
+        return $ok;
     }
 
     public function selecionar(){
