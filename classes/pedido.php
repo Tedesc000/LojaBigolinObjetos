@@ -41,7 +41,7 @@ class Pedido{
             $stmt->bindParam(":quantidade", $this->quantidade);
             $stmt->bindParam(":status", $this->status);
             $stmt->bindParam(":id_pedido", $this->id_pedido);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }else{
             $stmt = $this->pdo->prepare("INSERT INTO pedido(id_produto, id_cliente, data, preco, quantidade, status) VALUES (:id_produto, :id_cliente, :data, :preco, :quantidade, :status)");
             $stmt->bindParam(":id_produto", $this->id_produto);
@@ -50,8 +50,12 @@ class Pedido{
             $stmt->bindParam(":preco", $this->preco);
             $stmt->bindParam(":quantidade", $this->quantidade);
             $stmt->bindParam(":status", $this->status);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }
+        if($ok){
+            $this->id_pedido = $this->pdo->lastInsertId();
+        }
+        return $stmt->execute();
     }
 
     public function selecionar(){

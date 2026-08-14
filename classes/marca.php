@@ -25,13 +25,17 @@ class Marca{
             $stmt->bindParam(":nome", $this->nome);
             $stmt->bindParam(":pais", $this->pais);
             $stmt->bindParam(":id_marca", $this->id_marca);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }else{
             $stmt = $this->pdo->prepare("INSERT INTO marcas(nome, pais) VALUES (:nome, :pais)");
             $stmt->bindParam(":nome", $this->nome);
             $stmt->bindParam(":pais", $this->pais);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }
+        if($ok){
+            $this->id_marca = $this->pdo->lastInsertId();
+        }
+        return $stmt->execute();
     }
 
     public function selecionar(){

@@ -29,14 +29,18 @@ class Estoque{
             $stmt->bindParam(":quantidade", $this->quantidade);
             $stmt->bindParam(":pavilhao", $this->pavilhao);
             $stmt->bindParam(":id_estoque", $this->id_estoque);
-            return $stmt->execute();
+            $ok =  $stmt->execute();
         }else{
             $stmt = $this->pdo->prepare("INSERT INTO estoque(id_produto, quantidade, pavilhão) VALUES (:id_produto, :quantidade, :pavilhao)");
             $stmt->bindParam(":id_produto", $this->id_produto);
             $stmt->bindParam(":quantidade", $this->quantidade);
             $stmt->bindParam(":pavilhao", $this->pavilhao);
-        return $stmt->execute();
+        $ok = $stmt->execute();
         }
+        if($ok){
+            $this->id_estoque = $this->pdo->lastInsertId();
+        }
+        return $stmt->execute();
     }
 
     public function selecionar(){

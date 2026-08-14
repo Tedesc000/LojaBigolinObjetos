@@ -25,13 +25,17 @@ class Setor{
             $stmt->bindParam(":nome", $this->nome);
             $stmt->bindParam(":descricao", $this->descricao);
             $stmt->bindParam(":id_setor", $this->id_setor);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }else{
             $stmt = $this->pdo->prepare("INSERT INTO setor(nome, descricao) VALUES (:nome, :descricao)");
             $stmt->bindParam(":nome", $this->nome);
             $stmt->bindParam(":descricao", $this->descricao);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }
+        if($ok){
+            $this->id_setor = $this->pdo->lastInsertId();
+        }
+        return $stmt->execute();
     }
 
     public function selecionar(){

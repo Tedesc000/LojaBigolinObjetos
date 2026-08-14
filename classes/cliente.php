@@ -34,15 +34,19 @@ class Cliente{
             $stmt->bindParam(":telefone", $this->telefone);
             $stmt->bindParam(":email", $this->email);
             $stmt->bindParam(":id_cliente", $this->id_cliente);
-            return $stmt->execute();
+            $ok =  $stmt->execute();
         }else{
             $stmt = $this->pdo->prepare("INSERT INTO cliente(nome, cpf, telefone, email) VALUES (:nome, :cpf, :telefone, :email)");
             $stmt->bindParam(":nome", $this->nome);
             $stmt->bindParam(":cpf", $this->cpf);
             $stmt->bindParam(":telefone", $this->telefone);
             $stmt->bindParam(":email", $this->email);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }
+        if($ok){
+            $this->id_cliente = $this->pdo->lastInsertId();
+        }
+        return $stmt->execute();
     }
 
     public function selecionar(){

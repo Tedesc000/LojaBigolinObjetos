@@ -41,7 +41,7 @@ class Produto{
             $stmt->bindParam(":descricao", $this->descricao);
             $stmt->bindParam(":status", $this->status);
             $stmt->bindParam(":id_produto", $this->id_produto);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }else{
             $stmt = $this->pdo->prepare("INSERT INTO produto(id_marca, id_setor, nome, preco, descricao, status) VALUES (:id_marca, :id_setor, :nome, :preco, :descricao, :status)");
             $stmt->bindParam(":id_marca", $this->id_marca);
@@ -50,8 +50,12 @@ class Produto{
             $stmt->bindParam(":preco", $this->preco);
             $stmt->bindParam(":descricao", $this->descricao);
             $stmt->bindParam(":status", $this->status);
-            return $stmt->execute();
+            $ok = $stmt->execute();
         }
+        if($ok){
+            $this->id_produto = $this->pdo->lastInsertId();
+        }
+        return $stmt->execute();
     }
 
     public function selecionar(){

@@ -24,10 +24,7 @@
             <td>email</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM cliente ORDER BY id_cliente DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $clientes = $stmt->fetchAll();
+        
         foreach($clientes as $cliente):
         ?>
         <tr>
