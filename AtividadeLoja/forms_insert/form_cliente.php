@@ -68,23 +68,23 @@ if (isset($_GET['id_cliente'])){
         ?>
         <tr>
             <td>
-                <?= $cliente['id_cliente'] ?>
+                <?= $cliente->getID() ?>
             </td>
             <td>
-                <?= $cliente['nome'] ?>
+                <?= $cliente->getNome() ?>
             </td>
             <td>
-                <?= $cliente['cpf'] ?>
+                <?= $cliente->getCpf() ?>
             </td>
             <td>
-                <?= $cliente['telefone'] ?>
+                <?= $cliente->getTelefone() ?>
             </td>
             <td>
-                <?= $cliente['email'] ?>
+                <?= $cliente->getEmail() ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=cliente&id=<?= $cliente['id_cliente'] ?>">[X]</a>
-                <a href="form_cliente.php?id_cliente=<?= $cliente['id_cliente'] ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=cliente&id=<?= $cliente->getID() ?>">[X]</a>
+                <a href="form_cliente.php?id_cliente=<?= $cliente->getID() ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

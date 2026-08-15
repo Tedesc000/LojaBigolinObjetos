@@ -10,16 +10,9 @@
         $acao = "../update/update_estoque.php?id_estoque=$id_estoque";
         $titulo = "Digite os dados que deseja atualizar";
         try {
-            $sql = "SELECT * FROM estoque 
-                    WHERE id_estoque = :id_estoque";
-            $stmt = $pdo->prepare($sql);
-
-            $stmt->execute(
-                [':id_estoque' => $id_estoque]
-            );
-
-            $resultado = $stmt->fetchAll();
-            $estoque = $resultado[0]; 
+            $estoque = new Estoque();
+            $estoque->setID($id_estoque);
+            $estoque->selecionar();
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
@@ -46,14 +39,14 @@
                 <select name="id_produto" required>
                     <option value="">Selecione o produto</option>
                     <?php foreach ($produtos as $prod): ?>
-                        <option value="<?= htmlspecialchars($prod['id_produto']) ?>" <?= $estoque['id_produto'] == $prod['id_produto'] ? 'selected' : '' ?>>
+                        <option value="<?= htmlspecialchars($prod['id_produto']) ?>" <?= $estoque->getIdProduto() == $prod['id_produto'] ? 'selected' : '' ?>>
                             <?= htmlspecialchars($prod['id_produto']) ?> - <?= htmlspecialchars($prod['nome']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </label>
-            <label> Quantidade <input type="number" name="quantidade" value="<?= $estoque['quantidade'] ?>"> </label>
-            <label> Pavilhão <input type="text" name="pavilhao" value="<?= $estoque['pavilhao'] ?>"> </label>
+            <label> Quantidade <input type="number" name="quantidade" value="<?= $estoque->getQuantidade() ?>"> </label>
+            <label> Pavilhão <input type="text" name="pavilhao" value="<?= $estoque->getPavilhao() ?>"> </label>
             <button type="submit">Salvar</button>
         </form>
 
@@ -65,28 +58,25 @@
             <td>pavilhao</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM estoque ORDER BY id_estoque DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $estoques = $stmt->fetchAll();
+        $estoques = $estoque->listar();
         foreach($estoques as $e):
         ?>
         <tr>
             <td>
-                <?= $e['id_estoque'] ?>
+                <?= $e->getID() ?>
             </td>
             <td>
-                <?= $e['id_produto'] ?>
+                <?= $e->getIdProduto() ?>
             </td>
             <td>
-                <?= $e['quantidade'] ?>
+                <?= $e->getQuantidade() ?>
             </td>
             <td>
-                <?= $e['pavilhao'] ?>
+                <?= $e->getPavilhao() ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=estoque&id=<?= $e['id_estoque'] ?>">[X]</a>
-                <a href="form_estoque.php?id_estoque=<?= $e['id_estoque'] ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=estoque&id=<?= $e->getID() ?>">[X]</a>
+                <a href="form_estoque.php?id_estoque=<?= $e->getID() ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

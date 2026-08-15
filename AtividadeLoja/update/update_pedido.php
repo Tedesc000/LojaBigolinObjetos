@@ -1,26 +1,20 @@
 <?php
-require_once '../conexao.php';
-$pdo = getConexao();
+require_once '../classes/pedido.php';
 
 if (isset($_GET['id_pedido'])) {
     extract($_POST);
     $id_pedido = $_GET['id_pedido'];
 
     try {
-        $sql = "UPDATE pedido 
-                SET id_cliente = :id_cliente, id_produto = :id_produto, data = :data, preco = :preco, quantidade = :quantidade, status = :status 
-                WHERE id_pedido = :id_pedido";
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->execute([
-            ':id_cliente' => $id_cliente,
-            ':id_produto' => $id_produto,
-            ':data' => $data,
-            ':preco' => $preco,
-            ':quantidade' => $quantidade,
-            ':status' => $status,
-            ':id_pedido' => $id_pedido
-        ]);
+        $pedido = new Pedido();
+        $pedido->setID($id_pedido);
+        $pedido->setIdCliente($id_cliente);
+        $pedido->setIdProduto($id_produto);
+        $pedido->setData($data);
+        $pedido->setPreco($preco);
+        $pedido->setQuantidade($quantidade);
+        $pedido->setStatus($status);
+        $pedido->salvar();
 
         header('Location: ../forms_insert/form_pedido.php');
     } catch (PDOException $e) {

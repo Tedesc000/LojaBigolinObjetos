@@ -1,23 +1,17 @@
 <?php
-require_once '../conexao.php';
-$pdo = getConexao();
+require_once '../classes/estoque.php';
 
 if (isset($_GET['id_estoque'])) {
     extract($_POST);
     $id_estoque = $_GET['id_estoque'];
 
     try {
-        $sql = "UPDATE estoque 
-                SET id_produto = :id_produto, quantidade = :quantidade, pavilhao = :pavilhao 
-                WHERE id_estoque = :id_estoque";
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->execute([
-            ':id_produto' => $id_produto,
-            ':quantidade' => $quantidade,
-            ':pavilhao' => $pavilhao,
-            ':id_estoque' => $id_estoque
-        ]);
+        $estoque = new Estoque();
+        $estoque->setID($id_estoque);
+        $estoque->setIdProduto($id_produto);
+        $estoque->setQuantidade($quantidade);
+        $estoque->setPavilhao($pavilhao);
+        $estoque->salvar();
 
         header('Location: ../forms_insert/form_estoque.php');
     } catch (PDOException $e) {

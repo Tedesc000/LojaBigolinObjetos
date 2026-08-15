@@ -1,23 +1,17 @@
 <?php
-require_once '../conexao.php';
-$pdo = getConexao();
+require_once '../classes/marca.php';
 
 if (isset($_GET['id_marca'])) {
     extract($_POST);
     $id_marca = $_GET['id_marca'];
 
     try {
-        $sql = "UPDATE marcas 
-                SET nome = :nome, pais = :pais 
-                WHERE id_marca = :id_marca";
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->execute([
-            ':nome' => $nome,
-            ':pais' => $pais,
-            ':id_marca' => $id_marca
-        ]);
-
+        $marca = new Marca();
+        $marca->setID($id_marca);
+        $marca->setNome($nome);
+        $marca->setPais($pais);
+        $marca->salvar();
+        
         header('Location: ../forms_insert/form_marca.php');
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
