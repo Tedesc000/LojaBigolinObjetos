@@ -4,13 +4,13 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -100,
+    "scrollTop": -300,
     "scrollLeft": 0,
     "zoomLevel": 1,
     "show": 511,
     "database": 4,
     "databaseName": "Loja",
-    "canvasType": "@dineug/erd-editor/builtin-schema-sql",
+    "canvasType": "ERD",
     "language": 1,
     "tableNameCase": 4,
     "columnNameCase": 2,
@@ -187,7 +187,7 @@
       },
       "5gqIMEcwnkNrvak2-Dh9N": {
         "id": "5gqIMEcwnkNrvak2-Dh9N",
-        "name": "marcas",
+        "name": "marca",
         "comment": "",
         "columnIds": [
           "Diqz7r_EQn5hO0jTUjke-",
@@ -211,7 +211,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1781887428681,
+          "updateAt": 1786828951827,
           "createAt": 1781886269395
         }
       },

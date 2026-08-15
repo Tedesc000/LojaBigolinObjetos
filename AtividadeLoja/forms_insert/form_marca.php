@@ -7,16 +7,9 @@ if (isset($_GET['id_marca'])){
     $acao = "../update/update_marca.php?id_marca=$id_marca";
     $titulo = "Digite os dados que deseja atualizar";
     try {
-        $sql = "SELECT * FROM marcas 
-                WHERE id_marca = :id_marca";
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->execute(
-            [':id_marca' => $id_marca]
-        );
-
-        $resultado = $stmt->fetchAll();
-        $marca = $resultado[0]; 
+        $marca = new Marca();
+        $marca->setID($id_marca);
+        $marca->selecionar();
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }
@@ -51,25 +44,22 @@ if (isset($_GET['id_marca'])){
             <td>pais</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM marcas ORDER BY id_marca DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $marcas = $stmt->fetchAll();
+        $marcas = $marca->listar();
         foreach($marcas as $m):
         ?>
         <tr>
             <td>
-                <?= $m['id_marca'] ?>
+                <?= $m->getID() ?>
             </td>
             <td>
-                <?= $m['nome'] ?>
+                <?= $m->getNome() ?>
             </td>
             <td>
-                <?= $m['pais'] ?>
+                <?= $m->getPais() ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=marcas&id=<?= $m['id_marca'] ?>">[X]</a>
-                <a href="form_marca.php?id_marca=<?= $m['id_marca'] ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=marcas&id=<?= $m->getID() ?>">[X]</a>
+                <a href="form_marca.php?id_marca=<?= $m->getID() ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

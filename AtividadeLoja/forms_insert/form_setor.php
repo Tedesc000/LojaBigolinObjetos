@@ -7,23 +7,16 @@ if (isset($_GET['id_setor'])){
     $acao = "../update/update_setor.php?id_setor=$id_setor";
     $titulo = "Digite os dados que deseja atualizar";
     try {
-        $sql = "SELECT * FROM setor 
-                WHERE id_setor = :id_setor";
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->execute(
-            [':id_setor' => $id_setor]
-        );
-
-        $resultado = $stmt->fetchAll();
-        $setor = $resultado[0]; 
+        $setor = new Setor();
+        $setor->setID($id_setor);
+        $setor->selecionar();
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }
 }else{
     $acao = '../insert/insert_setor.php';
     $titulo = "Digite os dados";
-    $setor = [ 'nome' => '', 'descricao' => '' ];
+    $setor = new Setor();
 }
 ?>
 <!DOCTYPE html>
@@ -39,8 +32,8 @@ if (isset($_GET['id_setor'])){
     <main>
         <h1>Digite os dados do Setor</h1>
         <form action="<?= $acao ?>" method="post" enctype="multipart/form-data">
-            <label> Nome <input type="text" name="nome" value="<?= $setor['nome'] ?>"> </label>
-            <label> Descrição <input type="text" name="descricao" value="<?= $setor['descricao'] ?>"> </label>
+            <label> Nome <input type="text" name="nome" value="<?= $setor->getNome() ?>"> </label>
+            <label> Descrição <input type="text" name="descricao" value="<?= $setor->getDescricao() ?>"> </label>
             <button type="submit">Salvar</button>
         </form>
 
@@ -51,25 +44,22 @@ if (isset($_GET['id_setor'])){
             <td>descricao</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM setor ORDER BY id_setor DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $setores = $stmt->fetchAll();
+        $setores = $setor->listar();
         foreach($setores as $s):
         ?>
         <tr>
             <td>
-                <?= $s['id_setor'] ?>
+                <?= $s->getID() ?>
             </td>
             <td>
-                <?= $s['nome'] ?>
+                <?= $s->getNome() ?>
             </td>
             <td>
-                <?= $s['descricao'] ?>
+                <?= $s->getDescricao() ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=setor&id=<?= $s['id_setor'] ?>">[X]</a>
-                <a href="form_setor.php?id_setor=<?= $s['id_setor'] ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=setor&id=<?= $s->getID() ?>">[X]</a>
+                <a href="form_setor.php?id_setor=<?= $s->getID() ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

@@ -11,16 +11,9 @@
         $acao = "../update/update_pedido.php?id_pedido=$id_pedido";
         $titulo = "Digite os dados que deseja atualizar";
         try {
-            $sql = "SELECT * FROM pedido 
-                    WHERE id_pedido = :id_pedido";
-            $stmt = $pdo->prepare($sql);
-
-            $stmt->execute(
-                [':id_pedido' => $id_pedido]
-            );
-
-            $resultado = $stmt->fetchAll();
-            $pedido = $resultado[0]; 
+            $pedido = new Pedido();
+            $pedido->setID($id_pedido);
+            $pedido->selecionar();
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
@@ -80,37 +73,34 @@
             <td>status</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM pedido ORDER BY id_pedido DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $pedidos = $stmt->fetchAll();
+        $pedidos = $pedido->listar();
         foreach($pedidos as $p):
         ?>
         <tr>
             <td>
-                <?= $p['id_pedido'] ?>
+                <?= $p->getID() ?>
             </td>
             <td>
-                <?= $p['id_cliente'] ?>
+                <?= $p->getIdCliente() ?>
             </td>
             <td>
-                <?= $p['id_produto'] ?>
+                <?= $p->getIdProduto() ?>
             </td>
             <td>
-                <?= $p['quantidade'] ?>
+                <?= $p->getQuantidade() ?>
             </td>
             <td>
-                <?= $p['preco'] ?>
+                <?= $p->getPreco() ?>
             </td>
             <td>
-                <?= $p['data'] ?>
+                <?= $p->getData() ?>
             </td>
             <td>
-                <?= $p['status'] ?>
+                <?= $p->getStatus() ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=pedido&id=<?= $p['id_pedido'] ?>">[X]</a>
-                <a href="form_pedido.php?id_pedido=<?= $p['id_pedido'] ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=pedido&id=<?= $p->getID() ?>">[X]</a>
+                <a href="form_pedido.php?id_pedido=<?= $p->getID() ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

@@ -10,16 +10,9 @@
         $acao = "../update/update_produto.php?id_produto=$id_produto";
         $titulo = "Digite os dados que deseja atualizar";
         try {
-            $sql = "SELECT * FROM produto 
-                    WHERE id_produto = :id_produto";
-            $stmt = $pdo->prepare($sql);
-
-            $stmt->execute(
-                [':id_produto' => $id_produto]
-            );
-
-            $resultado = $stmt->fetchAll();
-            $produto = $resultado[0]; 
+            $produto = new Produto();
+            $produto->setID($id_produto);
+            $produto->selecionar();
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
@@ -79,34 +72,31 @@
             <td>descricao</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM produto ORDER BY id_produto DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $produtos = $stmt->fetchAll();
+        $produtos = $produto->listar();
         foreach($produtos as $p):
         ?>
         <tr>
             <td>
-                <?= $p['id_produto'] ?>
+                <?= $p->getID() ?>
             </td>
             <td>
-                <?= $p['id_marca'] ?>
+                <?= $p->getIdMarca() ?>
             </td>
             <td>
-                <?= $p['id_setor'] ?>
+                <?= $p->getIdSetor() ?>
             </td>
             <td>
-                <?= $p['nome'] ?>
+                <?= $p->getNome() ?>
             </td>
             <td>
-                <?= $p['preco'] ?>
+                <?= $p->getPreco() ?>
             </td>
             <td>
-                <?= $p['descricao'] ?>
+                <?= $p->getDescricao() ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=produto&id=<?= $p['id_produto'] ?>">[X]</a>
-                <a href="form_produto.php?id_produto=<?= $p['id_produto'] ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=produto&id=<?= $p->getID() ?>">[X]</a>
+                <a href="form_produto.php?id_produto=<?= $p->getID() ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>
