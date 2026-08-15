@@ -24,14 +24,14 @@ class Estoque{
 
     public function salvar(){
         if($this->id_estoque){
-            $stmt = $this->pdo->prepare("UPDATE estoque SET id_produto = :id_produto, quantidade = :quantidade, pavilhão = :pavilhao WHERE id_estoque = :id_estoque");
+            $stmt = $this->pdo->prepare("UPDATE estoque SET id_produto = :id_produto, quantidade = :quantidade, pavilhao = :pavilhao WHERE id_estoque = :id_estoque");
             $stmt->bindParam(":id_produto", $this->id_produto);
             $stmt->bindParam(":quantidade", $this->quantidade);
             $stmt->bindParam(":pavilhao", $this->pavilhao);
             $stmt->bindParam(":id_estoque", $this->id_estoque);
             $ok =  $stmt->execute();
         }else{
-            $stmt = $this->pdo->prepare("INSERT INTO estoque(id_produto, quantidade, pavilhão) VALUES (:id_produto, :quantidade, :pavilhao)");
+            $stmt = $this->pdo->prepare("INSERT INTO estoque(id_produto, quantidade, pavilhao) VALUES (:id_produto, :quantidade, :pavilhao)");
             $stmt->bindParam(":id_produto", $this->id_produto);
             $stmt->bindParam(":quantidade", $this->quantidade);
             $stmt->bindParam(":pavilhao", $this->pavilhao);

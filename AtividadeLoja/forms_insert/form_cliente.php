@@ -1,5 +1,5 @@
 <?php
-require_once 'conexao.php';
+require_once '../classes/cliente.php';
 if (isset($_GET['id_cliente'])){
     extract($_GET);
     $acao = "../update/update_cliente.php?id_cliente=$id_cliente";
@@ -17,8 +17,14 @@ if (isset($_GET['id_cliente'])){
         // $resultado = $stmt->fetchAll();
         // $cliente = $resultado[0]; 
         $cliente = new Cliente();
-        $cliente->setID($_GET[$id_cliente]);
+        $cliente->setID($id_cliente);
         $cliente->selecionar();
+        if (!empty($resultado)) {
+            $cliente->setNome($resultado[0]['nome']);
+            $cliente->setCpf($resultado[0]['cpf']);
+            $cliente->setTelefone($resultado[0]['telefone']);
+            $cliente->setEmail($resultado[0]['email']);
+        }
     } catch (PDOException $e) {
         // Caso dê algum erro na conexão ou na query
         echo "Erro: " . $e->getMessage();
@@ -63,7 +69,7 @@ if (isset($_GET['id_cliente'])){
             <td>email</td>
         </tr>
     <?php 
-        $cliente->listar();
+        $clientes = $cliente->listar();
         foreach($clientes as $cliente):
         ?>
         <tr>

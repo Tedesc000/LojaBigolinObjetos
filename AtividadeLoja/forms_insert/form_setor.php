@@ -10,6 +10,10 @@ if (isset($_GET['id_setor'])){
         $setor = new Setor();
         $setor->setID($id_setor);
         $setor->selecionar();
+        if (!empty($resultado)) {
+            $setor->setNome($resultado[0]['nome']);
+            $setor->setDescricao($resultado[0]['descricao']);
+        }
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }

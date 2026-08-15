@@ -14,6 +14,14 @@
             $pedido = new Pedido();
             $pedido->setID($id_pedido);
             $pedido->selecionar();
+            if (!empty($resultado)) {
+                $pedido->setIdProduto($resultado[0]['id_produto']);
+                $pedido->setIdCliente($resultado[0]['id_cliente']);
+                $pedido->setData($resultado[0]['data']);
+                $pedido->setQuantidade($resultado[0]['quantidade']);
+                $pedido->setStatus($resultado[0]['status']);
+                $pedido->setPreco($resultado[0]['preco']);
+            }
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }

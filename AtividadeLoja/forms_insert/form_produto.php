@@ -13,6 +13,14 @@
             $produto = new Produto();
             $produto->setID($id_produto);
             $produto->selecionar();
+            if (!empty($resultado)) {
+                $produto->setNome($resultado[0]['nome']);
+                $produto->setIdMarca($resultado[0]['id_marca']);
+                $produto->setIdSetor($resultado[0]['id_setor']);
+                $produto->setPreco($resultado[0]['preco']);
+                $produto->setDescricao($resultado[0]['descricao']);
+                $produto->setStatus($resultado[0]['status']);
+            }
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }

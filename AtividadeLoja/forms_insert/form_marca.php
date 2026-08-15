@@ -10,6 +10,10 @@ if (isset($_GET['id_marca'])){
         $marca = new Marca();
         $marca->setID($id_marca);
         $marca->selecionar();
+        if (!empty($resultado)) {
+            $marca->setNome($resultado[0]['nome']);
+            $marca->setPais($resultado[0]['pais']);
+        }
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }

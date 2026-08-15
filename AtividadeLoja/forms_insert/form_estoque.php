@@ -13,6 +13,11 @@
             $estoque = new Estoque();
             $estoque->setID($id_estoque);
             $estoque->selecionar();
+            if (!empty($resultado)) {
+            $estoque->setIdProduto($resultado[0]['id_produto']);
+            $estoque->setQuantidade($resultado[0]['quantidade']);
+            $estoque->setPavilhao($resultado[0]['pavilhao']);
+        }
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
