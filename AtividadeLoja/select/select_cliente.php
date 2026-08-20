@@ -9,8 +9,7 @@
 <body>
     <?php 
     require "../pages/header.php";
-    require "../conexao.php";
-    $pdo = getConexao();
+    require_once '../classes/cliente.php';
 
     $cliente = new Cliente();
     $clientes = $cliente->listar();

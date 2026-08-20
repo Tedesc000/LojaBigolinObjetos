@@ -9,8 +9,7 @@
 <body>
     <?php 
     require "../pages/header.php";
-    require "../conexao.php";
-    $pdo = getConexao();
+    require_once '../classes/pedido.php';
 
     ?>
     <main>

@@ -9,8 +9,7 @@
 <body>
     <?php 
     require "../pages/header.php";
-    require "../conexao.php";
-    $pdo = getConexao();
+    require_once '../classes/setor.php';
 
     ?>
     <main>
@@ -22,10 +21,8 @@
             <td>descricao</td>
         </tr>
     <?php 
-        $sql = "SELECT * FROM setor ORDER BY id_setor DESC";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $setores = $stmt->fetchAll();
+        $setor = new Setor();
+        $setores = $setor->listar();
         foreach($setores as $setor):
         ?>
         <tr>

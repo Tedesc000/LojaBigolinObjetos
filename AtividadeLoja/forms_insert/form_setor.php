@@ -1,6 +1,5 @@
 <?php
-require_once '../conexao.php';
-$pdo = getConexao();
+require_once '../classes/setor.php';
 
 if (isset($_GET['id_setor'])){
     extract($_GET);
@@ -9,7 +8,7 @@ if (isset($_GET['id_setor'])){
     try {
         $setor = new Setor();
         $setor->setID($id_setor);
-        $setor->selecionar();
+        $resultado = $setor->selecionar();
         if (!empty($resultado)) {
             $setor->setNome($resultado[0]['nome']);
             $setor->setDescricao($resultado[0]['descricao']);
@@ -53,17 +52,17 @@ if (isset($_GET['id_setor'])){
         ?>
         <tr>
             <td>
-                <?= $s->getID() ?>
+                <?= $s['id_setor'] ?>
             </td>
             <td>
-                <?= $s->getNome() ?>
+                <?= $s['nome'] ?>
             </td>
             <td>
-                <?= $s->getDescricao() ?>
+                <?= $s['descricao'] ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=setor&id=<?= $s->getID() ?>">[X]</a>
-                <a href="form_setor.php?id_setor=<?= $s->getID() ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=setor&id=<?= $s['id_setor'] ?>">[X]</a>
+                <a href="form_setor.php?id_setor=<?= $s['id_setor'] ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

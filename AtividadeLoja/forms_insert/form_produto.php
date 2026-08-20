@@ -1,4 +1,5 @@
 <?php
+    require_once "../classes/produto.php";
     require_once "../conexao.php";
     $pdo = getConexao();
     require_once "../select/select_opcoes.php";
@@ -12,14 +13,9 @@
         try {
             $produto = new Produto();
             $produto->setID($id_produto);
-            $produto->selecionar();
+            $resultado = $produto->selecionar();
             if (!empty($resultado)) {
-                $produto->setNome($resultado[0]['nome']);
-                $produto->setIdMarca($resultado[0]['id_marca']);
-                $produto->setIdSetor($resultado[0]['id_setor']);
-                $produto->setPreco($resultado[0]['preco']);
-                $produto->setDescricao($resultado[0]['descricao']);
-                $produto->setStatus($resultado[0]['status']);
+                $produto = $resultado[0];
             }
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
@@ -80,31 +76,32 @@
             <td>descricao</td>
         </tr>
     <?php 
-        $produtos = $produto->listar();
+        $objProduto = new Produto();
+        $produtos = $objProduto->listar();
         foreach($produtos as $p):
         ?>
         <tr>
             <td>
-                <?= $p->getID() ?>
+                <?= $p['id_produto'] ?>
             </td>
             <td>
-                <?= $p->getIdMarca() ?>
+                <?= $p['id_marca'] ?>
             </td>
             <td>
-                <?= $p->getIdSetor() ?>
+                <?= $p['id_setor'] ?>
             </td>
             <td>
-                <?= $p->getNome() ?>
+                <?= $p['nome'] ?>
             </td>
             <td>
-                <?= $p->getPreco() ?>
+                <?= $p['preco'] ?>
             </td>
             <td>
-                <?= $p->getDescricao() ?>
+                <?= $p['descricao'] ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=produto&id=<?= $p->getID() ?>">[X]</a>
-                <a href="form_produto.php?id_produto=<?= $p->getID() ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=produto&id=<?= $p['id_produto'] ?>">[X]</a>
+                <a href="form_produto.php?id_produto=<?= $p['id_produto'] ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

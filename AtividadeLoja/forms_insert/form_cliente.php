@@ -18,12 +18,9 @@ if (isset($_GET['id_cliente'])){
         // $cliente = $resultado[0]; 
         $cliente = new Cliente();
         $cliente->setID($id_cliente);
-        $cliente->selecionar();
+        $resultado = $cliente->selecionar();
         if (!empty($resultado)) {
-            $cliente->setNome($resultado[0]['nome']);
-            $cliente->setCpf($resultado[0]['cpf']);
-            $cliente->setTelefone($resultado[0]['telefone']);
-            $cliente->setEmail($resultado[0]['email']);
+            $cliente = $resultado[0];
         }
     } catch (PDOException $e) {
         // Caso dê algum erro na conexão ou na query
@@ -52,10 +49,10 @@ if (isset($_GET['id_cliente'])){
         <h1>Digite os dados do cliente</h1>
         <form action="<?= $acao ?>" method="post" enctype="multipart/form-data">
 
-            <label> Nome <input type="text" name="nome" value="<?= $cliente->getNome() ?>"> </label>
-            <label> CPF <input type="text" name="cpf" value="<?= $cliente->getCpf() ?>"> </label>
-            <label> Telefone <input type="text" name="telefone" value="<?= $cliente->getTelefone() ?>"> </label>
-            <label> Email <input type="email" name="email" value="<?= $cliente->getEmail() ?>"> </label>
+            <label> Nome <input type="text" name="nome" value="<?= $cliente['nome'] ?>"> </label>
+            <label> CPF <input type="text" name="cpf" value="<?= $cliente['cpf'] ?>"> </label>
+            <label> Telefone <input type="text" name="telefone" value="<?= $cliente['telefone'] ?>"> </label>
+            <label> Email <input type="email" name="email" value="<?= $cliente['email'] ?>"> </label>
 
             <button type="submit">Salvar</button>
         </form>
@@ -69,28 +66,29 @@ if (isset($_GET['id_cliente'])){
             <td>email</td>
         </tr>
     <?php 
-        $clientes = $cliente->listar();
-        foreach($clientes as $cliente):
+        $objCliente = new Cliente();
+        $clientes = $objCliente->listar();
+        foreach($clientes as $c):
         ?>
         <tr>
             <td>
-                <?= $cliente->getID() ?>
+                <?= $c['id_cliente'] ?>
             </td>
             <td>
-                <?= $cliente->getNome() ?>
+                <?= $c['nome'] ?>
             </td>
             <td>
-                <?= $cliente->getCpf() ?>
+                <?= $c['cpf'] ?>
             </td>
             <td>
-                <?= $cliente->getTelefone() ?>
+                <?= $c['telefone'] ?>
             </td>
             <td>
-                <?= $cliente->getEmail() ?>
+                <?= $c['email'] ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=cliente&id=<?= $cliente->getID() ?>">[X]</a>
-                <a href="form_cliente.php?id_cliente=<?= $cliente->getID() ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=cliente&id=<?= $c['id_cliente'] ?>">[X]</a>
+                <a href="form_cliente.php?id_cliente=<?= $c['id_cliente'] ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

@@ -9,8 +9,7 @@
 <body>
     <?php 
     require "../pages/header.php";
-    require "../conexao.php";
-    $pdo = getConexao();
+    require_once '../classes/marca.php';
 
     ?>
     <main>
@@ -22,7 +21,7 @@
             <td>pais</td>
         </tr>
     <?php 
-        $marca = new Cliente();
+        $marca = new Marca();
         $marcas = $marca->listar();
         foreach($marcas as $marca):
         ?>

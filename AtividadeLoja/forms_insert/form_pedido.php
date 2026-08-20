@@ -1,4 +1,5 @@
 <?php
+    require_once "../classes/pedido.php";
     require_once "../conexao.php";
     require_once "../select/select_opcoes.php";
     $pdo = getConexao();
@@ -13,14 +14,9 @@
         try {
             $pedido = new Pedido();
             $pedido->setID($id_pedido);
-            $pedido->selecionar();
+            $resultado = $pedido->selecionar();
             if (!empty($resultado)) {
-                $pedido->setIdProduto($resultado[0]['id_produto']);
-                $pedido->setIdCliente($resultado[0]['id_cliente']);
-                $pedido->setData($resultado[0]['data']);
-                $pedido->setQuantidade($resultado[0]['quantidade']);
-                $pedido->setStatus($resultado[0]['status']);
-                $pedido->setPreco($resultado[0]['preco']);
+                $pedido = $resultado[0];
             }
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
@@ -81,34 +77,35 @@
             <td>status</td>
         </tr>
     <?php 
-        $pedidos = $pedido->listar();
+        $objPedido = new Pedido();
+        $pedidos = $objPedido->listar();
         foreach($pedidos as $p):
         ?>
         <tr>
             <td>
-                <?= $p->getID() ?>
+                <?= $p['id_pedido'] ?>
             </td>
             <td>
-                <?= $p->getIdCliente() ?>
+                <?= $p['id_cliente'] ?>
             </td>
             <td>
-                <?= $p->getIdProduto() ?>
+                <?= $p['id_produto'] ?>
             </td>
             <td>
-                <?= $p->getQuantidade() ?>
+                <?= $p['quantidade'] ?>
             </td>
             <td>
-                <?= $p->getPreco() ?>
+                <?= $p['preco'] ?>
             </td>
             <td>
-                <?= $p->getData() ?>
+                <?= $p['data'] ?>
             </td>
             <td>
-                <?= $p->getStatus() ?>
+                <?= $p['status'] ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=pedido&id=<?= $p->getID() ?>">[X]</a>
-                <a href="form_pedido.php?id_pedido=<?= $p->getID() ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=pedido&id=<?= $p['id_pedido'] ?>">[X]</a>
+                <a href="form_pedido.php?id_pedido=<?= $p['id_pedido'] ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

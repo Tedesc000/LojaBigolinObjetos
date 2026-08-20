@@ -1,6 +1,5 @@
 <?php
-require_once '../conexao.php';
-$pdo = getConexao();
+require_once '../classes/marca.php';
 
 if (isset($_GET['id_marca'])){
     extract($_GET);
@@ -9,10 +8,9 @@ if (isset($_GET['id_marca'])){
     try {
         $marca = new Marca();
         $marca->setID($id_marca);
-        $marca->selecionar();
+        $resultado = $marca->selecionar();
         if (!empty($resultado)) {
-            $marca->setNome($resultado[0]['nome']);
-            $marca->setPais($resultado[0]['pais']);
+            $marca = $resultado[0];
         }
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
@@ -48,22 +46,23 @@ if (isset($_GET['id_marca'])){
             <td>pais</td>
         </tr>
     <?php 
-        $marcas = $marca->listar();
+        $objMarca = new Marca();
+        $marcas = $objMarca->listar();
         foreach($marcas as $m):
         ?>
         <tr>
             <td>
-                <?= $m->getID() ?>
+                <?= $m['id_marca'] ?>
             </td>
             <td>
-                <?= $m->getNome() ?>
+                <?= $m['nome'] ?>
             </td>
             <td>
-                <?= $m->getPais() ?>
+                <?= $m['pais'] ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=marcas&id=<?= $m->getID() ?>">[X]</a>
-                <a href="form_marca.php?id_marca=<?= $m->getID() ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=marcas&id=<?= $m['id_marca'] ?>">[X]</a>
+                <a href="form_marca.php?id_marca=<?= $m['id_marca'] ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>

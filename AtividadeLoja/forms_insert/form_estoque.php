@@ -1,4 +1,5 @@
 <?php
+    require_once "../classes/estoque.php";
     require_once "../conexao.php";
     require_once "../select/select_opcoes.php";
     $pdo = getConexao();
@@ -12,12 +13,10 @@
         try {
             $estoque = new Estoque();
             $estoque->setID($id_estoque);
-            $estoque->selecionar();
+            $resultado = $estoque->selecionar();
             if (!empty($resultado)) {
-            $estoque->setIdProduto($resultado[0]['id_produto']);
-            $estoque->setQuantidade($resultado[0]['quantidade']);
-            $estoque->setPavilhao($resultado[0]['pavilhao']);
-        }
+                $estoque = $resultado[0];
+            }
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
@@ -44,14 +43,14 @@
                 <select name="id_produto" required>
                     <option value="">Selecione o produto</option>
                     <?php foreach ($produtos as $prod): ?>
-                        <option value="<?= htmlspecialchars($prod['id_produto']) ?>" <?= $estoque->getIdProduto() == $prod['id_produto'] ? 'selected' : '' ?>>
+                        <option value="<?= htmlspecialchars($prod['id_produto']) ?>" <?= $estoque['id_produto'] == $prod['id_produto'] ? 'selected' : '' ?>>
                             <?= htmlspecialchars($prod['id_produto']) ?> - <?= htmlspecialchars($prod['nome']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </label>
-            <label> Quantidade <input type="number" name="quantidade" value="<?= $estoque->getQuantidade() ?>"> </label>
-            <label> Pavilhão <input type="text" name="pavilhao" value="<?= $estoque->getPavilhao() ?>"> </label>
+            <label> Quantidade <input type="number" name="quantidade" value="<?= $estoque['quantidade'] ?>"> </label>
+            <label> Pavilhão <input type="text" name="pavilhao" value="<?= $estoque['pavilhao'] ?>"> </label>
             <button type="submit">Salvar</button>
         </form>
 
@@ -63,25 +62,26 @@
             <td>pavilhao</td>
         </tr>
     <?php 
-        $estoques = $estoque->listar();
+        $objEstoque = new Estoque();
+        $estoques = $objEstoque->listar();
         foreach($estoques as $e):
         ?>
         <tr>
             <td>
-                <?= $e->getID() ?>
+                <?= $e['id_estoque'] ?>
             </td>
             <td>
-                <?= $e->getIdProduto() ?>
+                <?= $e['id_produto'] ?>
             </td>
             <td>
-                <?= $e->getQuantidade() ?>
+                <?= $e['quantidade'] ?>
             </td>
             <td>
-                <?= $e->getPavilhao() ?>
+                <?= $e['pavilhao'] ?>
             </td>
             <td>
-                <a href="../delete/deletar.php?nome_tabela=estoque&id=<?= $e->getID() ?>">[X]</a>
-                <a href="form_estoque.php?id_estoque=<?= $e->getID() ?>">Editar</a>   
+                <a href="../delete/deletar.php?nome_tabela=estoque&id=<?= $e['id_estoque'] ?>">[X]</a>
+                <a href="form_estoque.php?id_estoque=<?= $e['id_estoque'] ?>">Editar</a>   
             </td>
         </tr>
         <?php endforeach; ?>
