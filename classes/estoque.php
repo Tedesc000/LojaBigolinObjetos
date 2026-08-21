@@ -1,5 +1,5 @@
 <?php
-require "../conexao.php";
+require "../AtividadeLoja/conexao.php";
 class Estoque{
     private $id_estoque;
     private $id_produto;

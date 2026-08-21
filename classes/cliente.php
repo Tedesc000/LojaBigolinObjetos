@@ -1,5 +1,5 @@
 <?php
-require "../conexao.php";
+require "../AtividadeLoja/conexao.php";
 class Cliente{
     private $id_cliente;
     private $nome;
@@ -48,7 +48,7 @@ class Cliente{
         }
         return $ok;
     }
-
+    //aqui ele deveria popular os dados na classe para fazer operações, chamar os sets ao inves de trazer o objeto inteiro
     public function selecionar(){
         $stmt = $this->pdo->prepare("SELECT * FROM cliente WHERE id_cliente = :id_cliente");
         $stmt->execute([':id_cliente' => $this->id_cliente]);
