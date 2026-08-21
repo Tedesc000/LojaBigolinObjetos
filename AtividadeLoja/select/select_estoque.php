@@ -9,7 +9,7 @@
 <body>
     <?php 
     require "../pages/header.php";
-    require_once '../classes/estoque.php';
+    require_once '../../classes/estoque.php';
 
     ?>
     <main>

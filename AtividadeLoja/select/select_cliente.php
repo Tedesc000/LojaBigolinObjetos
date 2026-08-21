@@ -9,7 +9,7 @@
 <body>
     <?php 
     require "../pages/header.php";
-    require_once '../classes/cliente.php';
+    require_once '../../classes/cliente.php';
 
     $cliente = new Cliente();
     $clientes = $cliente->listar();
