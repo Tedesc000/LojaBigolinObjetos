@@ -1,5 +1,5 @@
 <?php
-    require_once "../classes/estoque.php";
+    require_once "../../classes/estoque.php";
     require_once "../conexao.php";
     require_once "../select/select_opcoes.php";
     $pdo = getConexao();

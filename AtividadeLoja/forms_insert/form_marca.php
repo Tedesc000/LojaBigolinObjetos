@@ -1,5 +1,5 @@
 <?php
-require_once '../classes/marca.php';
+require_once '../../classes/marca.php';
 
 if (isset($_GET['id_marca'])){
     extract($_GET);

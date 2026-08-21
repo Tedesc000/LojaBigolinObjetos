@@ -1,5 +1,5 @@
 <?php
-require_once '../classes/cliente.php';
+require_once '../../classes/cliente.php';
 if (isset($_GET['id_cliente'])){
     extract($_GET);
     $acao = "../update/update_cliente.php?id_cliente=$id_cliente";

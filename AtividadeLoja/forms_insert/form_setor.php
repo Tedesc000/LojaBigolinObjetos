@@ -1,5 +1,5 @@
 <?php
-require_once '../classes/setor.php';
+require_once '../../classes/setor.php';
 
 if (isset($_GET['id_setor'])){
     extract($_GET);
