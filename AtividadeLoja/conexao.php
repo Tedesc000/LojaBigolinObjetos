@@ -1,6 +1,6 @@
 <?php
 function getConexao(){
-    $dsn = "mysql:host=localhost;dbname=Loja;charset=utf8";
+    $dsn = "mysql:host=localhost;dbname=lojaBigolin;charset=utf8";
     $usuario = "root";
     $senha = "";
 
