@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,6 @@
     <title>Loja</title>
 </head>
 <body>
-    <?php require "pages/header.php"; ?>
     <main>
         <h1>O que deseja fazer hoje?</h1>
 
@@ -18,4 +17,9 @@
     </main>
 
 </body>
-</html>
+</html> -->
+<?php
+require_once "config.php";
+
+$modulo = $_GET['modulo'] ?? 'cliente';
+$acao = $_GET['acao'] ?? 'listar';
