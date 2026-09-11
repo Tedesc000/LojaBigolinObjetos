@@ -6,13 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Clientes</h1>
-    <a href="index.php?modulo=cliente$acao=criar">Novo Cliente</a>
+    <h1>Produtos</h1>
+    <a href="index.php?modulo=marca$acao=criar">Nova Marca</a>
     
     <ul>
-        <?php foreach ($clientes as $c): ?>
+        <?php foreach ($marcas as $m): ?>
             <li>
-                <?= htmlespecialchars($c['nome']) ?> - CPF: <?= ($c['cpf']) ?>
+                <?= htmlespecialchars($m['nome']) ?> - <?= ($m['pais']) ?>
             </li>
         <?php endforeach; ?>
     </ul>

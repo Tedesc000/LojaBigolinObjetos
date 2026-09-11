@@ -1,5 +1,5 @@
 <?php
-require_once "models/cliente.php";
+require_once "models/Cliente.php";
 class ClienteController{
     private $db;
 
