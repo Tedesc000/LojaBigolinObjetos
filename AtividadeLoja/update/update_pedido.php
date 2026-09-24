@@ -1,5 +1,5 @@
 <?php
-require_once '../classes/pedido.php';
+require_once __DIR__ . '/../Autoload.php';
 
 if (isset($_GET['id_pedido'])) {
     extract($_POST);

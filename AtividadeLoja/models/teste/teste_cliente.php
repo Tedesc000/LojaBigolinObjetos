@@ -1,5 +1,5 @@
 <?php
-require_once '../cliente.php';
+require_once __DIR__ . '/../../Autoload.php';
 
 $cliente = new Cliente();
 $cliente->setCpf('123456789');

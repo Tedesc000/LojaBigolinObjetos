@@ -1,10 +1,5 @@
-<?php 
-require_once '../classes/cliente.php';
-require_once '../classes/marca.php';
-require_once '../classes/estoque.php';
-require_once '../classes/pedido.php';
-require_once '../classes/produto.php';
-require_once '../classes/setor.php';
+<?php
+require_once __DIR__ . '/../Autoload.php';
 
 if (isset($_GET['nome_tabela']) && isset($_GET['id'])) {
     $nome_tabela = $_GET['nome_tabela'];

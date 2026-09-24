@@ -9,7 +9,7 @@
 <body>
     <?php 
     require "../pages/header.php";
-    require_once '../../classes/produto.php';
+    require_once __DIR__ . '/../Autoload.php';
 
     ?>
     <main>

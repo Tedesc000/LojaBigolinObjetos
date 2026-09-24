@@ -107,14 +107,14 @@ main table {
     background-color: white;
 }
 
-main table tr:first-child {
+main table tr:first-child, main table thead tr {
     background-color: rgb(112, 164, 182);
     font-weight: bold;
 }
 
-main table td {
+main table td, main table th {
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid #ccc;
     text-align: center;
 }
 

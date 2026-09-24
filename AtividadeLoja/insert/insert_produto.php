@@ -1,5 +1,5 @@
 <?php
-require_once '../classes/produto.php';
+require_once __DIR__ . '/../Autoload.php';
 $produto = new Produto();
 $produto->setNome($_POST['nome']);
 $produto->setPreco($_POST['preco']);

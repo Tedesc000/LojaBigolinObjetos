@@ -1,5 +1,5 @@
 <?php
-require_once '../classes/cliente.php';
+require_once __DIR__ . '/../Autoload.php';
 
 $cliente = new Cliente();
 $cliente->setNome($_POST['nome']);

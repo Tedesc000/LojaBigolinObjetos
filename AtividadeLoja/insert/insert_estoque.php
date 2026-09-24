@@ -1,5 +1,5 @@
 <?php
-require_once '../classes/estoque.php';
+require_once __DIR__ . '/../Autoload.php';
 $estoque = new Estoque();
 $estoque->setIdProduto($_POST['id_produto']);
 $estoque->setQuantidade($_POST['quantidade']);

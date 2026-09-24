@@ -1,5 +1,5 @@
 <?php
-require_once '../estoque.php';
+require_once __DIR__ . '/../../Autoload.php';
 
 $estoque = new Estoque();
 $estoque->setIdProduto(1);

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../classes/pedido.php';
+require_once __DIR__ . '/../Autoload.php';
 
 $pedido = new Pedido();
 $pedido->setIdProduto($_POST['id_produto']);
